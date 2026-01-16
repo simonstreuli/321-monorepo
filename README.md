@@ -6,12 +6,12 @@ Dieses Projekt implementiert eine verteilte Plattform für einen Pizza-Lieferdie
 
 ## Team & Zuständigkeiten
 
-| Name  | Rolle                                            | Service               |
-| ----- | ------------------------------------------------ | --------------------- |
-| Simon | Einstiegspunkt, Validierung & Event-Publishing   | [Order Service](#)    |
-| Noris | Synchroner Zahlungsabwickler & Fehler-Simulation | [Payment Service](#)  |
-| Fran  | Asynchrone Zubereitung & Skalierung              | [Kitchen Service](#)  |
-| Mouad | Event-Konsumierung & Status-Tracking             | [Delivery Service](#) |
+| Name  | Rolle                                            | Service                                |
+| ----- | ------------------------------------------------ | -------------------------------------- |
+| Simon | Einstiegspunkt, Validierung & Event-Publishing   | [Order Service](/order-service/)       |
+| Noris | Synchroner Zahlungsabwickler & Fehler-Simulation | [Payment Service](/payment-service/)   |
+| Fran  | Asynchrone Zubereitung & Skalierung              | [Kitchen Service](/kitchen-service/)   |
+| Mouad | Event-Konsumierung & Status-Tracking             | [Delivery Service](/delivery-service/) |
 
 ## Architektur
 
