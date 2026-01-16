@@ -29,6 +29,7 @@ class OrderServiceTest {
     private OrderService orderService;
 
     private static final String PAYMENT_SERVICE_URL = "http://localhost:8081";
+    private static final double PIZZA_PRICE = 15.99;
 
     @BeforeEach
     void setUp() {
@@ -62,7 +63,7 @@ class OrderServiceTest {
             eq(PaymentResponse.class)
         );
         PaymentRequest capturedPayment = paymentCaptor.getValue();
-        assertEquals(31.98, capturedPayment.getAmount()); // 2 * 15.99
+        assertEquals(2 * PIZZA_PRICE, capturedPayment.getAmount()); // 2 * 15.99
         assertEquals("John Doe", capturedPayment.getCustomerName());
 
         // Verify message was sent to RabbitMQ
@@ -161,7 +162,7 @@ class OrderServiceTest {
         ArgumentCaptor<PaymentRequest> paymentCaptor = ArgumentCaptor.forClass(PaymentRequest.class);
         verify(restTemplate, times(2)).postForObject(anyString(), paymentCaptor.capture(), eq(PaymentResponse.class));
         
-        assertEquals(15.99, paymentCaptor.getAllValues().get(0).getAmount());
-        assertEquals(79.95, paymentCaptor.getAllValues().get(1).getAmount());
+        assertEquals(1 * PIZZA_PRICE, paymentCaptor.getAllValues().get(0).getAmount());
+        assertEquals(5 * PIZZA_PRICE, paymentCaptor.getAllValues().get(1).getAmount());
     }
 }

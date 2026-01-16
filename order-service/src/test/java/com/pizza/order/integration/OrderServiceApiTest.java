@@ -36,6 +36,12 @@ class OrderServiceApiTest {
     @MockBean
     private RestTemplate restTemplate;
 
+    // Test data constants
+    private static final String[] PIZZA_TYPES = {
+        "Margherita", "Pepperoni", "Hawaiian", "Quattro Formaggi",
+        "Diavola", "Vegetariana", "Marinara", "Capricciosa"
+    };
+
     @Test
     void endToEnd_CreateOrder_Success() throws Exception {
         // Given
@@ -157,13 +163,8 @@ class OrderServiceApiTest {
         when(restTemplate.postForObject(anyString(), any(), eq(PaymentResponse.class)))
             .thenReturn(successResponse);
 
-        String[] pizzaTypes = {
-            "Margherita", "Pepperoni", "Hawaiian", "Quattro Formaggi",
-            "Diavola", "Vegetariana", "Marinara", "Capricciosa"
-        };
-
         // Test each pizza type
-        for (String pizzaType : pizzaTypes) {
+        for (String pizzaType : PIZZA_TYPES) {
             OrderRequest order = new OrderRequest(pizzaType, 1, "Test Street", "Test Customer");
             mockMvc.perform(post("/orders")
                     .contentType(MediaType.APPLICATION_JSON)
