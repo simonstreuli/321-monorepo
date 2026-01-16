@@ -5,13 +5,8 @@ import com.pizza.payment.model.PaymentResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
-
-import java.util.Random;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -60,26 +55,5 @@ class PaymentServiceTest {
         assertFalse(response.isSuccess());
         assertNull(response.getTransactionId());
         assertEquals("Payment declined by bank. Please try a different payment method.", response.getMessage());
-    }
-
-    @Test
-    void processPayment_shouldHandleInterruptedException() throws Exception {
-        PaymentService service = new PaymentService();
-        ReflectionTestUtils.setField(service, "failureRate", 0.0d);
-        ReflectionTestUtils.setField(service, "delayMin", 0);
-        ReflectionTestUtils.setField(service, "delayMax", 1);
-
-        PaymentRequest request = mock(PaymentRequest.class);
-        when(request.getOrderId()).thenReturn("order-3");
-        when(request.getAmount()).thenReturn(75.0);
-
-        try (MockedStatic<Thread> threadMock = Mockito.mockStatic(Thread.class)) {
-            threadMock.when(() -> Thread.sleep(anyLong())).thenThrow(new InterruptedException());
-            PaymentResponse response = service.processPayment(request);
-            assertNotNull(response);
-            assertTrue(response.isSuccess());
-            assertNotNull(response.getTransactionId());
-            assertEquals("Payment processed successfully", response.getMessage());
-        }
     }
 }

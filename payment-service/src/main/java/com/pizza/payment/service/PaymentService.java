@@ -17,17 +17,17 @@ public class PaymentService {
     private final Random random = new Random();
 
     @Value("${payment.failure.rate:0.2}")
-    private double failureRate;
+    private double failureRate = 0.2;
 
     @Value("${payment.delay.min:100}")
-    private int delayMin;
+    private int delayMin = 100;
 
     @Value("${payment.delay.max:500}")
-    private int delayMax;
+    private int delayMax = 500;
 
     public PaymentResponse processPayment(PaymentRequest paymentRequest) {
-        logger.info("Processing payment for order {} with amount {}", 
-            paymentRequest.getOrderId(), paymentRequest.getAmount());
+        logger.info("Processing payment for order {} with amount {}",
+                paymentRequest.getOrderId(), paymentRequest.getAmount());
 
         // Simulate processing delay
         try {
@@ -41,25 +41,23 @@ public class PaymentService {
 
         // Simulate random failures to test resilience
         boolean shouldFail = random.nextDouble() < failureRate;
-        
+
         if (shouldFail) {
-            logger.warn("Payment failed for order {} (simulated failure)", 
-                paymentRequest.getOrderId());
+            logger.warn("Payment failed for order {} (simulated failure)",
+                    paymentRequest.getOrderId());
             return new PaymentResponse(
-                null,
-                false,
-                "Payment declined by bank. Please try a different payment method."
-            );
+                    null,
+                    false,
+                    "Payment declined by bank. Please try a different payment method.");
         }
 
         String transactionId = UUID.randomUUID().toString();
-        logger.info("Payment successful for order {}, transaction ID: {}", 
-            paymentRequest.getOrderId(), transactionId);
+        logger.info("Payment successful for order {}, transaction ID: {}",
+                paymentRequest.getOrderId(), transactionId);
 
         return new PaymentResponse(
-            transactionId,
-            true,
-            "Payment processed successfully"
-        );
+                transactionId,
+                true,
+                "Payment processed successfully");
     }
 }
