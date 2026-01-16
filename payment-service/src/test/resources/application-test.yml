@@ -1,0 +1,22 @@
+server:
+  port: 0  # Random port for tests
+
+spring:
+  application:
+    name: order-service-test
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  main:
+    allow-bean-definition-overriding: true
+
+payment:
+  service:
+    url: http://localhost:8081
+
+logging:
+  level:
+    com.pizza.order: DEBUG
+    org.springframework: WARN

@@ -1,0 +1,2 @@
+# Ignore Maven/Java build output
+target/
