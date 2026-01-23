@@ -4,12 +4,29 @@
 
 Dieses Verzeichnis enthält den Order-Service. Der Service ist mit Java und Spring Boot implementiert.
 
+## API Versioning
+
+Der Order-Service unterstützt jetzt mehrere API-Versionen:
+- **Legacy**: `POST /orders` (für Rückwärtskompatibilität)
+- **V1**: `POST /api/v1/orders` (gleiche Funktionalität wie Legacy)
+- **V2**: `POST /api/v2/orders` (erweiterte Response mit Metadaten)
+
+Siehe [API_VERSIONING.md](./API_VERSIONING.md) für Details.
+
+## Docker Pipeline
+
+Der Service verfügt über eine automatisierte GitHub Actions Pipeline, die Docker-Images baut und zu GitHub Container Registry pusht. Die Pipeline wird automatisch bei Änderungen an `order-service/**` oder `pizza-models/**` ausgeführt.
+
 ## Projektstruktur
 
 - `src/main/java/com/pizza/order/` – Java-Quellcode
+  - `controller/` – Legacy Controller (Rückwärtskompatibilität)
+  - `controller/v1/` – V1 API Controller
+  - `controller/v2/` – V2 API Controller (mit erweiterten Features)
 - `src/main/resources/` – Ressourcen und Konfigurationsdateien
 - `Dockerfile` – Docker-Konfiguration
 - `pom.xml` – Maven Build-Konfiguration
+- `API_VERSIONING.md` – Detaillierte API-Versionierungsdokumentation
 
 ## Starten des Order-Service
 
@@ -25,9 +42,19 @@ Dieses Verzeichnis enthält den Order-Service. Der Service ist mit Java und Spri
 
 Der Order-Service stellt folgende REST-API-Endpunkte zur Verfügung:
 
-### POST /orders
+### POST /orders (Legacy)
 
 Erstellt eine neue Bestellung. Erwartet ein JSON-Objekt mit den Bestelldaten (Pizza, Menge, Adresse etc.).
+
+### POST /api/v1/orders
+
+Erstellt eine neue Bestellung über die V1 API. Gleiche Funktionalität wie Legacy-Endpoint.
+
+### POST /api/v2/orders
+
+Erstellt eine neue Bestellung über die V2 API. Gibt eine erweiterte Response mit zusätzlichen Metadaten zurück (apiVersion, timestamp).
+
+Für alle Endpunkte:
 Beispiel-Request:
 
 ```json
