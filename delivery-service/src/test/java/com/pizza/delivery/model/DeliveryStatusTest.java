@@ -1,5 +1,6 @@
 package com.pizza.delivery.model;
 
+import com.pizza.models.DeliveryStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
