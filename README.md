@@ -1,5 +1,7 @@
 # Distributed Pizza Platform
 
+[![Integration Tests](https://github.com/simonstreuli/321-monorepo/actions/workflows/integration-test.yml/badge.svg)](https://github.com/simonstreuli/321-monorepo/actions/workflows/integration-test.yml)
+
 ## Projektübersicht
 
 Dieses Projekt implementiert eine verteilte Plattform für einen Pizza-Lieferdienst mit vier unabhängigen Microservices, die über REST und RabbitMQ kommunizieren. Das System demonstriert moderne Microservice-Patterns wie asynchrone Kommunikation, Resilience und horizontale Skalierung.
@@ -234,6 +236,34 @@ done
 
 docker compose logs kitchen-service | grep "Received order"
 ```
+
+## Integration Tests
+
+Das Projekt verfügt über umfassende End-to-End Integration Tests, die das gesamte System validieren.
+
+### Automatische Tests
+
+Die Integration Tests laufen automatisch:
+- Bei jedem Push zu `main` oder `develop`
+- Bei jedem Pull Request
+- Täglich um 2:00 UTC (geplante Ausführung)
+
+**Status:** Siehe Badge oben im README
+
+### Lokale Ausführung
+
+```bash
+# Integration Tests ausführen
+./integration-test.sh
+```
+
+Der Test Script:
+1. Startet alle Services mit Docker Compose
+2. Wartet auf Health Checks aller Services
+3. Führt End-to-End Tests durch (Bestellungen, Message Flow, etc.)
+4. Räumt automatisch auf
+
+**Dokumentation:** [INTEGRATION_TESTS.md](INTEGRATION_TESTS.md)
 
 ## Hochverfügbarkeit (HA) Features
 
