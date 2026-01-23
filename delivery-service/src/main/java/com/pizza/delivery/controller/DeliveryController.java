@@ -1,6 +1,6 @@
 package com.pizza.delivery.controller;
 
-import com.pizza.delivery.model.DeliveryStatus;
+import com.pizza.models.DeliveryStatus;
 import com.pizza.delivery.service.DeliveryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

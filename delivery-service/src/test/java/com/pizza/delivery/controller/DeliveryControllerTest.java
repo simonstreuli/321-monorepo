@@ -1,6 +1,6 @@
 package com.pizza.delivery.controller;
 
-import com.pizza.delivery.model.DeliveryStatus;
+import com.pizza.models.DeliveryStatus;
 import com.pizza.delivery.service.DeliveryService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

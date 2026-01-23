@@ -1,8 +1,8 @@
 package com.pizza.delivery.service;
 
 import com.pizza.delivery.config.RabbitMQConfig;
-import com.pizza.delivery.model.DeliveryStatus;
-import com.pizza.delivery.model.OrderReadyEvent;
+import com.pizza.models.DeliveryStatus;
+import com.pizza.models.OrderReadyEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

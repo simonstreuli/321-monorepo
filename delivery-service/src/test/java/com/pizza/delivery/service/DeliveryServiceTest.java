@@ -1,7 +1,7 @@
 package com.pizza.delivery.service;
 
-import com.pizza.delivery.model.DeliveryStatus;
-import com.pizza.delivery.model.OrderReadyEvent;
+import com.pizza.models.DeliveryStatus;
+import com.pizza.models.OrderReadyEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
