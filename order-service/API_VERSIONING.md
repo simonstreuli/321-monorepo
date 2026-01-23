@@ -82,7 +82,7 @@ A GitHub Actions workflow has been created to automatically build and push Docke
 ### Features:
 - **Automatic builds** on push to `main` or `develop` branches
 - **Pushes to GitHub Container Registry** (ghcr.io)
-- **Multi-platform support**: linux/amd64 and linux/arm64
+- **Platform support**: linux/amd64
 - **Build caching** for faster builds
 - **Semantic versioning** support with tags
 - **Pull request validation** (builds but doesn't push)
