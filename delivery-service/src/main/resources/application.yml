@@ -1,0 +1,23 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: delivery-service
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+springdoc:
+  api-docs:
+    path: /api/v1/api-docs
+  swagger-ui:
+    path: /api/v1/swagger-ui.html
+    operationsSorter: method
+
+logging:
+  level:
+    com.pizza.delivery: INFO
+    org.springframework.amqp: DEBUG
