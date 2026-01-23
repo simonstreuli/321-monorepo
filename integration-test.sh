@@ -95,6 +95,8 @@ log_info "======================================"
 echo ""
 
 TEST_FAILED=0
+TESTS_PASSED=0
+TESTS_TOTAL=6
 
 # Test 1: Health Checks
 log_info "Test 1: Health Checks"
@@ -102,6 +104,7 @@ if curl -s -f http://localhost:8080/orders/health > /dev/null && \
    curl -s -f http://localhost:8081/health > /dev/null && \
    curl -s -f http://localhost:8083/deliveries/health > /dev/null; then
     log_info "✓ All health checks passed"
+    TESTS_PASSED=$((TESTS_PASSED + 1))
 else
     log_error "✗ Health check failed"
     TEST_FAILED=1
@@ -123,6 +126,7 @@ if echo "$ORDER_RESPONSE" | grep -q "orderId"; then
     ORDER_ID=$(echo "$ORDER_RESPONSE" | grep -o '"orderId":"[^"]*"' | cut -d'"' -f4)
     log_info "✓ Order created successfully with ID: $ORDER_ID"
     echo "   Response: $ORDER_RESPONSE"
+    TESTS_PASSED=$((TESTS_PASSED + 1))
 else
     log_error "✗ Failed to create order"
     echo "   Response: $ORDER_RESPONSE"
@@ -138,6 +142,7 @@ sleep 2  # Give time for message to be processed
 RABBITMQ_RESPONSE=$(curl -s -u guest:guest http://localhost:15672/api/queues/%2F/order.placed)
 if echo "$RABBITMQ_RESPONSE" | grep -q "order.placed"; then
     log_info "✓ RabbitMQ queue 'order.placed' exists"
+    TESTS_PASSED=$((TESTS_PASSED + 1))
 else
     log_warning "⚠ Could not verify RabbitMQ queue"
 fi
@@ -163,6 +168,7 @@ done
 
 if [ $SUCCESS_COUNT -eq 3 ]; then
     log_info "✓ Successfully created 3 orders"
+    TESTS_PASSED=$((TESTS_PASSED + 1))
 else
     log_error "✗ Only $SUCCESS_COUNT out of 3 orders succeeded"
     TEST_FAILED=1
@@ -177,8 +183,9 @@ log_info "Test 5: Delivery Service Integration"
 sleep 15
 
 # Check if delivery service responds with HTTP 200 (service is working)
-HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8083/deliveries)
-DELIVERIES_RESPONSE=$(curl -s http://localhost:8083/deliveries)
+# Use -L to follow redirects (service may redirect /deliveries to /deliveries/)
+HTTP_STATUS=$(curl -s -L -o /dev/null -w "%{http_code}" http://localhost:8083/deliveries)
+DELIVERIES_RESPONSE=$(curl -s -L http://localhost:8083/deliveries)
 
 if [ "$HTTP_STATUS" = "200" ]; then
     log_info "✓ Delivery service is responding (HTTP $HTTP_STATUS)"
@@ -187,6 +194,7 @@ if [ "$HTTP_STATUS" = "200" ]; then
     else
         echo "   Active deliveries: (empty response - no active deliveries yet)"
     fi
+    TESTS_PASSED=$((TESTS_PASSED + 1))
 else
     log_error "✗ Delivery service integration issue (HTTP $HTTP_STATUS)"
     echo "   Response: $DELIVERIES_RESPONSE"
@@ -198,6 +206,7 @@ echo ""
 log_info "Test 6: Frontend Service"
 if curl -s -f http://localhost:3000 > /dev/null; then
     log_info "✓ Frontend is accessible"
+    TESTS_PASSED=$((TESTS_PASSED + 1))
 else
     log_error "✗ Frontend is not accessible"
     TEST_FAILED=1
@@ -224,6 +233,27 @@ echo ""
 
 log_info "Delivery Service Logs:"
 docker compose logs --tail=10 delivery-service
+echo ""
+
+# Test Summary
+echo ""
+log_info "======================================"
+log_info "Test Summary"
+log_info "======================================"
+echo ""
+
+TESTS_FAILED=$((TESTS_TOTAL - TESTS_PASSED))
+log_info "Total Tests:    $TESTS_TOTAL"
+log_info "Tests Passed:   ${GREEN}$TESTS_PASSED${NC}"
+log_info "Tests Failed:   ${RED}$TESTS_FAILED${NC}"
+echo ""
+
+if [ $TESTS_PASSED -eq $TESTS_TOTAL ]; then
+    log_info "Success Rate:   ${GREEN}100%${NC}"
+else
+    SUCCESS_RATE=$((TESTS_PASSED * 100 / TESTS_TOTAL))
+    log_info "Success Rate:   ${YELLOW}${SUCCESS_RATE}%${NC}"
+fi
 echo ""
 
 # Final result
