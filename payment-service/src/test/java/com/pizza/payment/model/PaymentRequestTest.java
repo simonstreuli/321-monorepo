@@ -1,5 +1,6 @@
 package com.pizza.payment.model;
 
+import com.pizza.models.PaymentRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import jakarta.validation.Validation;

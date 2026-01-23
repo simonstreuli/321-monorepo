@@ -1,9 +1,9 @@
 package com.pizza.order.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pizza.order.model.OrderRequest;
-import com.pizza.order.model.OrderResponse;
-import com.pizza.order.model.PaymentResponse;
+import com.pizza.models.OrderRequest;
+import com.pizza.models.OrderResponse;
+import com.pizza.models.PaymentResponse;
 import com.pizza.order.service.OrderService;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

@@ -32,6 +32,20 @@ graph TB
 
 ## Services
 
+### Pizza Models Library
+
+Zentrale Bibliothek für alle gemeinsamen Datenmodelle. Verhindert Duplikation und stellt sicher, dass alle Services dieselben Model-Definitionen verwenden.
+
+**Vorteile:**
+- **Konsistenz:** Alle Services nutzen exakt dieselben Model-Definitionen
+- **Wartbarkeit:** Änderungen an Modellen werden zentral vorgenommen
+- **Type Safety:** Compile-Time-Fehler bei inkompatiblen Model-Versionen
+- **Automatische Updates:** Producer-Änderungen werden automatisch an Consumer weitergegeben
+
+**Enthaltene Modelle:** OrderRequest, OrderResponse, OrderPlacedEvent, OrderReadyEvent, PaymentRequest, PaymentResponse
+
+**Dokumentation:** [pizza-models/README.md](/pizza-models/README.md)
+
 ### 1. Order Service (Port 8080)
 
 Einstiegspunkt für Bestellungen mit REST API `POST /orders`. Validiert Eingabedaten, kommuniziert synchron mit Payment Service und asynchron mit Kitchen Service via RabbitMQ.

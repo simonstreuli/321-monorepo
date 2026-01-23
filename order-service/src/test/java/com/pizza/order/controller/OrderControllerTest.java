@@ -1,7 +1,7 @@
 package com.pizza.order.controller;
 
-import com.pizza.order.model.OrderRequest;
-import com.pizza.order.model.OrderResponse;
+import com.pizza.models.OrderRequest;
+import com.pizza.models.OrderResponse;
 import com.pizza.order.service.OrderService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

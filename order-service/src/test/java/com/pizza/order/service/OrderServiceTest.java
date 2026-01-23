@@ -1,7 +1,7 @@
 package com.pizza.order.service;
 
 import com.pizza.order.config.RabbitMQConfig;
-import com.pizza.order.model.*;
+import com.pizza.models.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
