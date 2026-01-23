@@ -1,7 +1,7 @@
 package com.pizza.payment.service;
 
-import com.pizza.payment.model.PaymentRequest;
-import com.pizza.payment.model.PaymentResponse;
+import com.pizza.models.PaymentRequest;
+import com.pizza.models.PaymentResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

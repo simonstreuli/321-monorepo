@@ -1,7 +1,7 @@
 package com.pizza.payment.controller;
 
-import com.pizza.payment.model.PaymentRequest;
-import com.pizza.payment.model.PaymentResponse;
+import com.pizza.models.PaymentRequest;
+import com.pizza.models.PaymentResponse;
 import com.pizza.payment.service.PaymentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

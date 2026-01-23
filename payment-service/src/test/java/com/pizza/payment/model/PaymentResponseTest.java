@@ -1,5 +1,6 @@
 package com.pizza.payment.model;
 
+import com.pizza.models.PaymentResponse;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

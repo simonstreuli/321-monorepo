@@ -1,9 +1,9 @@
 package com.pizza.order.integration;
 
 import com.pizza.order.config.RabbitMQConfig;
-import com.pizza.order.model.OrderPlacedEvent;
-import com.pizza.order.model.OrderRequest;
-import com.pizza.order.model.PaymentResponse;
+import com.pizza.models.OrderPlacedEvent;
+import com.pizza.models.OrderRequest;
+import com.pizza.models.PaymentResponse;
 import com.pizza.order.service.OrderService;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;

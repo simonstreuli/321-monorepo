@@ -1,7 +1,7 @@
 package com.pizza.order.service;
 
 import com.pizza.order.config.RabbitMQConfig;
-import com.pizza.order.model.*;
+import com.pizza.models.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

@@ -1,5 +1,6 @@
 package com.pizza.order.model;
 
+import com.pizza.models.OrderRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
