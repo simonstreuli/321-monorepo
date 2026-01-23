@@ -1,0 +1,71 @@
+name: Integration Tests - All Services
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+  # Run nightly to catch integration issues
+  schedule:
+    - cron: '0 2 * * *'  # Run at 2 AM UTC every day
+
+jobs:
+  integration-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull Docker images
+        run: |
+          echo "Pulling required Docker images..."
+          docker compose pull --ignore-pull-failures || true
+
+      - name: Display Docker Compose version
+        run: docker compose version
+
+      - name: Display Docker version
+        run: docker --version
+
+      - name: Free up disk space
+        run: |
+          echo "Freeing up disk space..."
+          docker system prune -af
+          df -h
+
+      - name: Run Integration Tests
+        run: |
+          echo "Starting integration tests..."
+          bash integration-test.sh
+
+      - name: Display container logs on failure
+        if: failure()
+        run: |
+          echo "======================================"
+          echo "Container Logs (Full Output)"
+          echo "======================================"
+          docker compose logs
+
+      - name: Cleanup
+        if: always()
+        run: |
+          echo "Cleaning up Docker resources..."
+          docker compose down -v
+          docker system prune -f
