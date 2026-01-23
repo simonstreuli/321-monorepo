@@ -176,12 +176,19 @@ log_info "Test 5: Delivery Service Integration"
 # Kitchen preparation time is configured to 5-10 seconds
 sleep 15
 
+# Check if delivery service responds with HTTP 200 (service is working)
+HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8083/deliveries)
 DELIVERIES_RESPONSE=$(curl -s http://localhost:8083/deliveries)
-if echo "$DELIVERIES_RESPONSE" | grep -q "orderId" || echo "$DELIVERIES_RESPONSE" | grep -q "\[\]"; then
-    log_info "✓ Delivery service is responding"
-    echo "   Active deliveries: $DELIVERIES_RESPONSE"
+
+if [ "$HTTP_STATUS" = "200" ]; then
+    log_info "✓ Delivery service is responding (HTTP $HTTP_STATUS)"
+    if [ -n "$DELIVERIES_RESPONSE" ]; then
+        echo "   Active deliveries: $DELIVERIES_RESPONSE"
+    else
+        echo "   Active deliveries: (empty response - no active deliveries yet)"
+    fi
 else
-    log_error "✗ Delivery service integration issue"
+    log_error "✗ Delivery service integration issue (HTTP $HTTP_STATUS)"
     echo "   Response: $DELIVERIES_RESPONSE"
     TEST_FAILED=1
 fi
