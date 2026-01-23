@@ -89,9 +89,9 @@ A GitHub Actions workflow has been created to automatically build and push Docke
 
 ### Tags Generated:
 - `latest` - for main branch
-- `<branch-name>` - for branch builds
-- `<branch>-<sha>` - for specific commits
-- Semantic version tags when using semver releases (e.g., v1.0.0)
+- `<branch-name>` - for branch builds (e.g., `develop`, `main`)
+- `sha-<commit-sha>` - for specific commits (e.g., `sha-abc1234`)
+- Semantic version tags when using semver releases (e.g., `v1.0.0`, `v1.0`, `v1`)
 
 ### Triggering the Workflow:
 1. **Automatic**: Push changes to `main` or `develop` that affect:
@@ -105,13 +105,13 @@ A GitHub Actions workflow has been created to automatically build and push Docke
 
 ```bash
 # Pull the image
-docker pull ghcr.io/simonstreuli/321-monorepo/order-service:latest
+docker pull ghcr.io/simonstreuli/order-service:latest
 
 # Run the container
 docker run -p 8080:8080 \
   -e SPRING_RABBITMQ_HOST=rabbitmq \
   -e PAYMENT_SERVICE_URL=http://payment-service:8081 \
-  ghcr.io/simonstreuli/321-monorepo/order-service:latest
+  ghcr.io/simonstreuli/order-service:latest
 ```
 
 ## Local Development
