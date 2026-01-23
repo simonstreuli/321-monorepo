@@ -1,4 +1,4 @@
-package com.pizza.delivery.model;
+package com.pizza.models;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
