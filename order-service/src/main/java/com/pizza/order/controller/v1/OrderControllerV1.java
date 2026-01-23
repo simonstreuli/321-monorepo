@@ -1,4 +1,4 @@
-package com.pizza.order.controller;
+package com.pizza.order.controller.v1;
 
 import com.pizza.models.OrderRequest;
 import com.pizza.models.OrderResponse;
@@ -16,20 +16,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/orders")
-public class OrderController {
+@RequestMapping("/api/v1/orders")
+public class OrderControllerV1 {
 
-    private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
+    private static final Logger logger = LoggerFactory.getLogger(OrderControllerV1.class);
 
     private final OrderService orderService;
 
-    public OrderController(OrderService orderService) {
+    public OrderControllerV1(OrderService orderService) {
         this.orderService = orderService;
     }
 
     @PostMapping
     public ResponseEntity<OrderResponse> createOrder(@Valid @RequestBody OrderRequest orderRequest) {
-        logger.info("Legacy endpoint - Received order request for {} x {} to {}", 
+        logger.info("Received order request for {} x {} to {}", 
             orderRequest.getQuantity(), orderRequest.getPizza(), orderRequest.getAddress());
         
         OrderResponse response = orderService.processOrder(orderRequest);
@@ -46,7 +46,7 @@ public class OrderController {
 
     @GetMapping("/health")
     public ResponseEntity<String> health() {
-        return ResponseEntity.ok("Order Service is running");
+        return ResponseEntity.ok("Order Service V1 is running");
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
