@@ -139,6 +139,12 @@ Ein automatisierter CI/CD Workflow der:
    ```bash
    ./integration-test.sh
    ```
+   
+   Falls das Script nicht ausführbar ist:
+   ```bash
+   chmod +x integration-test.sh
+   ./integration-test.sh
+   ```
 
 3. **Optional: Nur Services starten (ohne Tests):**
    ```bash

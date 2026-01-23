@@ -171,7 +171,10 @@ echo ""
 
 # Test 5: Delivery Service Integration
 log_info "Test 5: Delivery Service Integration"
-sleep 15  # Wait for kitchen service to prepare and delivery to receive event
+# Wait for kitchen service to prepare (5-10s) and delivery to receive event
+# This is intentionally a fixed wait for integration test simplicity
+# Kitchen preparation time is configured to 5-10 seconds
+sleep 15
 
 DELIVERIES_RESPONSE=$(curl -s http://localhost:8083/deliveries)
 if echo "$DELIVERIES_RESPONSE" | grep -q "orderId" || echo "$DELIVERIES_RESPONSE" | grep -q "\[\]"; then
