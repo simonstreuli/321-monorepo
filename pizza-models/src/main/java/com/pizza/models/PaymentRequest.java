@@ -1,4 +1,4 @@
-package com.pizza.payment.model;
+package com.pizza.models;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;

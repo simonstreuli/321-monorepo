@@ -1,8 +1,8 @@
 package com.pizza.kitchen.service;
 
 import com.pizza.kitchen.config.RabbitMQConfig;
-import com.pizza.kitchen.model.OrderPlacedEvent;
-import com.pizza.kitchen.model.OrderReadyEvent;
+import com.pizza.models.OrderPlacedEvent;
+import com.pizza.models.OrderReadyEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

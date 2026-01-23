@@ -19,10 +19,17 @@
     <description>Kitchen Service for Pizza Delivery Platform</description>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>17</java.version>
     </properties>
 
     <dependencies>
+        <!-- Pizza Models Library -->
+        <dependency>
+            <groupId>com.pizza</groupId>
+            <artifactId>pizza-models</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
         <!-- Spring Boot AMQP (RabbitMQ) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

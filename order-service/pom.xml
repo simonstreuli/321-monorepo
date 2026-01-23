@@ -23,6 +23,13 @@
     </properties>
 
     <dependencies>
+        <!-- Pizza Models Library -->
+        <dependency>
+            <groupId>com.pizza</groupId>
+            <artifactId>pizza-models</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
         <!-- Spring Boot Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

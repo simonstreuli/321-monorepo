@@ -1,4 +1,4 @@
-package com.pizza.payment.model;
+package com.pizza.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

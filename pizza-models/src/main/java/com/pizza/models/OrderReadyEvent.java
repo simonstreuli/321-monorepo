@@ -1,4 +1,4 @@
-package com.pizza.order.model;
+package com.pizza.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,11 +9,11 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderPlacedEvent {
+public class OrderReadyEvent {
     private String orderId;
     private String pizza;
     private Integer quantity;
     private String address;
     private String customerName;
-    private LocalDateTime timestamp;
+    private LocalDateTime preparedAt;
 }
