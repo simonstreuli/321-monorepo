@@ -1,0 +1,60 @@
+name: Pizza Models - Build and Publish Maven Package
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'pizza-models/**'
+      - '.github/workflows/pizza-models-publish.yml'
+  pull_request:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'pizza-models/**'
+      - '.github/workflows/pizza-models-publish.yml'
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    defaults:
+      run:
+        working-directory: pizza-models
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+          server-id: github
+          server-username: GITHUB_ACTOR
+          server-password: GITHUB_TOKEN
+
+      - name: Extract version from pom.xml
+        id: version
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Extracted version: $VERSION"
+
+      - name: Build with Maven
+        run: mvn -B clean package
+
+      - name: Publish to GitHub Packages
+        if: github.event_name != 'pull_request'
+        run: mvn -B deploy
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

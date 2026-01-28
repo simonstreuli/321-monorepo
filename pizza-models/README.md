@@ -25,15 +25,54 @@ The pizza-models library solves the problem of model duplication across microser
 
 ## Usage
 
-### Adding as a Dependency
+### Adding as a Dependency from GitHub Packages
 
-Add this dependency to your service's `pom.xml`:
+To use this library from GitHub Packages, first add the GitHub Packages repository to your `pom.xml`:
+
+```xml
+<repositories>
+    <repository>
+        <id>github</id>
+        <name>GitHub Packages</name>
+        <url>https://maven.pkg.github.com/simonstreuli/321-monorepo</url>
+    </repository>
+</repositories>
+```
+
+Then add the dependency:
 
 ```xml
 <dependency>
     <groupId>com.pizza</groupId>
     <artifactId>pizza-models</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
+</dependency>
+```
+
+**Note**: To authenticate with GitHub Packages, you need to add the following server configuration to your `~/.m2/settings.xml`:
+
+```xml
+<servers>
+    <server>
+        <id>github</id>
+        <username>YOUR_GITHUB_USERNAME</username>
+        <password>YOUR_GITHUB_TOKEN</password>
+    </server>
+</servers>
+```
+
+Replace `YOUR_GITHUB_USERNAME` with your GitHub username and `YOUR_GITHUB_TOKEN` with a personal access token that has `read:packages` scope.
+You can create a token from [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens).
+
+### Adding as a Local Dependency
+
+If you're developing locally without GitHub Packages, add this dependency to your service's `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>com.pizza</groupId>
+    <artifactId>pizza-models</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
