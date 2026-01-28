@@ -1,5 +1,10 @@
 # Delivery Service
 
+> [!IMPORTANT]
+> This folder was a temporary solution and is now **read-only**.
+> 
+> The active development has moved to a dedicated repository: [Modul-321-Delivery-Service](https://github.com/MouadBourbian/Modul-321-Delivery-Service)
+
 [![Build Status](https://github.com/MouadBourbian/Modul-321-Delivery-Service/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/MouadBourbian/Modul-321-Delivery-Service/actions/workflows/ci-cd.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Java Version](https://img.shields.io/badge/Java-17-blue.svg)](https://openjdk.org/projects/jdk/17/)
