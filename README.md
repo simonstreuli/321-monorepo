@@ -12,7 +12,6 @@ Für Präsentationen stehen umfassende Präsentations-Dateien zur Verfügung:
 
 - **[PRESENTATION.md](PRESENTATION.md)** – Vollständige Präsentation im Markdown-Format
 - **[PRESENTATION_SLIDES.md](PRESENTATION_SLIDES.md)** – Folien-Format (Marp) für Live-Präsentationen
-- **[PRESENTATION_README.md](PRESENTATION_README.md)** – Anleitung zur Verwendung der Präsentationen
 
 Die Präsentationen decken alle Aspekte des Projekts ab: Architektur, Team, Technologien, Demo-Szenarien, und Best Practices.
 
